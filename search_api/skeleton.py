@@ -21,29 +21,13 @@ import argparse
 import sys
 import logging
 
+import search_api.main as main
+
 from search_api import __version__
 
-__author__ = "joao.carabetta@gmail.com"
-__copyright__ = "joao.carabetta@gmail.com"
 __license__ = "none"
 
 _logger = logging.getLogger(__name__)
-
-
-def fib(n):
-    """Fibonacci example function
-
-    Args:
-      n (int): integer
-
-    Returns:
-      int: n-th Fibonacci number
-    """
-    assert n > 0
-    a, b = 1, 1
-    for i in range(n-1):
-        a, b = b, a+b
-    return a
 
 
 def parse_args(args):
@@ -94,7 +78,7 @@ def setup_logging(loglevel):
                         format=logformat, datefmt="%Y-%m-%d %H:%M:%S")
 
 
-def main(args):
+def do(args):
     """Main entry point allowing external calls
 
     Args:
@@ -103,14 +87,14 @@ def main(args):
     args = parse_args(args)
     setup_logging(args.loglevel)
     _logger.debug("Starting crazy calculations...")
-    print("The {}-th Fibonacci number is {}".format(args.n, fib(args.n)))
+    print("The {}-th Fibonacci number is {}".format(args.n, main.fib(args.n)))
     _logger.info("Script ends here")
 
 
 def run():
     """Entry point for console_scripts
     """
-    main(sys.argv[1:])
+    do(sys.argv[1:])
 
 
 if __name__ == "__main__":
